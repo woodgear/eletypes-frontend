@@ -6,11 +6,26 @@ import {
 import { randomIntFromRange } from "./randomUtils";
 
 const sentencesGenerator = (sentencesCount, language) => {
+  const len=Object.keys(ENGLISH_SENTENCES).length;
   if (language === ENGLISH_MODE) {
     const EnglishSentencesList = [];
-    for (let i = 0; i < sentencesCount; i++) {
-      const rand = randomIntFromRange(0, 50);
-      EnglishSentencesList.push(ENGLISH_SENTENCES[rand]);
+    if (sentencesCount >= len) {
+        return Object.values(ENGLISH_SENTENCES);
+    }
+    const sets= new Set();
+    // simple and stupid way to generate random sentences
+    for (let i = 0; i < sentencesCount*10; i++) {
+      const rand = randomIntFromRange(0, len)
+      if (sets.size === sentencesCount){
+        break;
+      }
+      if (sets.has(rand)){
+        continue;
+      }
+      sets.add(rand);
+    }
+    for(let i of sets){
+      EnglishSentencesList.push(ENGLISH_SENTENCES[i]);
     }
     return EnglishSentencesList;
   }
