@@ -15,7 +15,7 @@ const sentencesGenerator = (sentencesCount, language) => {
     const sets= new Set();
     // simple and stupid way to generate random sentences
     for (let i = 0; i < sentencesCount*10; i++) {
-      const rand = randomIntFromRange(0, len)
+      const rand = randomIntFromRange(0, len-1)
       if (sets.size === sentencesCount){
         break;
       }
